@@ -1,0 +1,22 @@
+{
+  "name": "titustum/kenyan-faker-provider",
+  "description": "Kenyan-specific Faker provider for Laravel and PHP Faker",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "KenyaFaker\\": "src/"
+    }
+  },
+  "require": {
+    "fakerphp/faker": "^1.24"
+  },
+  "extra": {
+  "laravel": {
+    "providers": [
+      "KenyaFaker\\Laravel\\KenyanFakerServiceProvider"
+    ]
+  }
+}
+
+}
