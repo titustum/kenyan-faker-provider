@@ -34,8 +34,8 @@ composer require titustum/kenyan-faker-provider --dev
 use Faker\Factory as Faker;
 
 $faker = Faker::create();
-$faker->addProvider(new \Faker\Provider\en_KE\Person($faker));
-$faker->addProvider(new \Faker\Provider\en_KE\PhoneNumber($faker));
+$faker->addProvider(new \KenyaFaker\Provider\en_KE\Person($faker));
+$faker->addProvider(new \KenyaFaker\Provider\en_KE\PhoneNumber($faker));
 
 echo $faker->name('male');
 echo $faker->phoneNumber();
