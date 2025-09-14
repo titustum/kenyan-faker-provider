@@ -4,8 +4,14 @@
   "type": "library",
   "license": "MIT",
   "autoload": {
-    "psr-4": {
+  "psr-4": {
+      "KenyaFaker\\Provider\\": "src/Provider/",
       "KenyaFaker\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "KenyaFaker\\Tests\\": "test/"
     }
   },
   "require": {
