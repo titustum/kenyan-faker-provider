@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Faker\Provider\en_KE;
+namespace KenyaFaker\Provider\en_KE;
 
 use Faker\Test\TestCase;
 

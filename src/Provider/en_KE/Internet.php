@@ -1,6 +1,6 @@
 <?php
 
-namespace Faker\Provider\en_KE;
+namespace KenyaFaker\Provider\en_KE;
 
 class Internet extends \Faker\Provider\Internet
 {
