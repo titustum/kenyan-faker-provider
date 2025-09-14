@@ -4,7 +4,7 @@
   "type": "library",
   "license": "MIT",
   "autoload": {
-  "psr-4": {
+    "psr-4": {
       "KenyaFaker\\Provider\\": "src/Provider/",
       "KenyaFaker\\": "src/"
     }
@@ -16,13 +16,6 @@
   },
   "require": {
     "fakerphp/faker": "^1.24"
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "KenyaFaker\\Laravel\\KenyanFakerServiceProvider"
-      ]
-    }
   },
   "authors": [
     {
