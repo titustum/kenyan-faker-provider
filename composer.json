@@ -12,11 +12,18 @@
     "fakerphp/faker": "^1.24"
   },
   "extra": {
-  "laravel": {
-    "providers": [
-      "KenyaFaker\\Laravel\\KenyanFakerServiceProvider"
-    ]
-  }
-}
-
+    "laravel": {
+      "providers": [
+        "KenyaFaker\\Laravel\\KenyanFakerServiceProvider"
+      ]
+    }
+  },
+  "authors": [
+    {
+      "name": "Titus Tum",
+      "email": "tituskiptanuitum@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }
