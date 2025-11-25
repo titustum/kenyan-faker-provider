@@ -52,14 +52,15 @@ class UsersTableSeeder extends Seeder
         $faker->addProvider(new \KenyaFaker\Provider\en_KE\Internet($faker));
 
         DB::table('users')->insert([
-            'name'       => $faker->name('male'),  // James Kiprotich
-            'email'      => $faker->email(),
-            'phone'      => $faker->phoneNumber(),
-            'county'     => $faker->county(),
-            'address'    => $faker->address(),
-            'company'    => $faker->company(),
-            'mpesa_till' => $faker->mpesaTill(),
-        ]);
+          'name'       => $faker->name('male'),      // e.g. "James Kiprotich"
+          'email'      => $faker->email(),           // e.g. "j.kiprotich@example.co.ke"
+          'phone'      => $faker->phoneNumber(),     // e.g. "0722 456 789"
+          'county'     => $faker->county(),          // e.g. "Uasin Gishu"
+          'address'    => $faker->address(),         // e.g. "Eldoret, Uasin Gishu 30100"
+          'company'    => $faker->company(),         // e.g. "Kilimanjaro Supplies Ltd"
+          'mpesa_till' => $faker->mpesaTill(),       // e.g. "923456"
+      ]);
+
     }
 }
 ```
