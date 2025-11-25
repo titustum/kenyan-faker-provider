@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace KenyaFaker\Provider\en_KE;
 
-use Faker\Provider\Person;
-use Faker\Provider\Base; // optional, but often needed
-use Faker\Provider\Miscellaneous; // optional, if Company uses it
-
+use Faker\Provider\Base;
+use Faker\Provider\Miscellaneous; // optional, but often needed
+use Faker\Provider\Person; // optional, if Company uses it
 use Faker\Test\TestCase;
 
 /**
@@ -15,7 +14,7 @@ use Faker\Test\TestCase;
  */
 final class CompanyTest extends TestCase
 {
-    public function testCompanyNameIsValidString(): void
+    public function test_company_name_is_valid_string(): void
     {
         $company = $this->faker->company();
 
@@ -34,7 +33,7 @@ final class CompanyTest extends TestCase
                 break;
             }
         }
-        self::assertTrue($foundBase, "Company name should start with a known base company name");
+        self::assertTrue($foundBase, 'Company name should start with a known base company name');
 
         // Optionally check suffix presence (suffix may or may not be appended)
         $hasSuffix = false;
@@ -56,7 +55,7 @@ final class CompanyTest extends TestCase
                     break;
                 }
             }
-            self::assertTrue($matchedSuffix, "If suffix exists, it must be one of the known suffixes");
+            self::assertTrue($matchedSuffix, 'If suffix exists, it must be one of the known suffixes');
         }
     }
 

@@ -4,7 +4,7 @@ namespace KenyaFaker\Provider\en_KE;
 
 /**
  * Class PhoneNumber
- * 
+ *
  * Provides realistic Kenyan phone number formats for Faker,
  * including E.164 international standard formats.
  */

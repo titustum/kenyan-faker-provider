@@ -55,7 +55,7 @@ class Internet extends \Faker\Provider\Internet
         $company = static::domainWord();
         $tld = static::randomElement(static::$tld);
 
-        return strtolower($company . '.' . $tld);
+        return strtolower($company.'.'.$tld);
     }
 
     /**
@@ -63,7 +63,7 @@ class Internet extends \Faker\Provider\Internet
      */
     public function freeEmail()
     {
-        return static::userName() . '@' . static::randomElement(static::$freeEmailDomain);
+        return static::userName().'@'.static::randomElement(static::$freeEmailDomain);
     }
 
     /**
@@ -71,7 +71,7 @@ class Internet extends \Faker\Provider\Internet
      */
     public function companyEmail()
     {
-        return static::userName() . '@' . static::randomElement(static::$ispDomains);
+        return static::userName().'@'.static::randomElement(static::$ispDomains);
     }
 
     /**

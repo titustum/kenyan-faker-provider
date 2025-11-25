@@ -4,7 +4,7 @@ namespace KenyaFaker\Provider\en_KE;
 
 /**
  * Class Address
- * 
+ *
  * Provides Kenyan specific address data for Faker.
  * Includes cities, counties, streets, and regions commonly used in Kenya.
  * Extends the base Faker Address provider.
@@ -13,7 +13,7 @@ namespace KenyaFaker\Provider\en_KE;
 class Address extends \Faker\Provider\Address
 {
     /**
-     * @var array List of major cities, municipalities, county headquarters, and local towns in Kenya. 
+     * @var array List of major cities, municipalities, county headquarters, and local towns in Kenya.
      */
     protected static $city = [
         'Nairobi',
@@ -119,7 +119,7 @@ class Address extends \Faker\Provider\Address
     ];
 
     /**
-     * @var array List of all Kenyan counties. 
+     * @var array List of all Kenyan counties.
      */
     protected static $county = [
         'Mombasa',
@@ -242,6 +242,7 @@ class Address extends \Faker\Provider\Address
 
     /**
      * @var array List of Kenya's broad geographical regions.
+     *
      * @see https://en.wikipedia.org/wiki/Provinces_of_Kenya
      */
     protected static $region = [
@@ -256,7 +257,7 @@ class Address extends \Faker\Provider\Address
 
     /**
      * Returns a random Kenyan region.
-     * 
+     *
      * @return string
      */
     public function region()
@@ -266,7 +267,7 @@ class Address extends \Faker\Provider\Address
 
     /**
      * Returns a random Kenyan county.
-     * 
+     *
      * @return string
      */
     public function county()
@@ -276,7 +277,7 @@ class Address extends \Faker\Provider\Address
 
     /**
      * Returns a random Kenyan city or town.
-     * 
+     *
      * @return string
      */
     public function city()
@@ -286,7 +287,7 @@ class Address extends \Faker\Provider\Address
 
     /**
      * Alias for city() to provide town name.
-     * 
+     *
      * @return string
      */
     public function town()
@@ -297,7 +298,7 @@ class Address extends \Faker\Provider\Address
     /**
      * Generates a random Kenyan postal code.
      * Kenyan postal codes typically fall into defined numeric ranges based on region.
-     * 
+     *
      * @return string Postal code as a 5-digit zero-padded string
      */
     public static function postcode()
@@ -320,7 +321,7 @@ class Address extends \Faker\Provider\Address
 
     /**
      * Returns a random street name from the Kenyan streets list.
-     * 
+     *
      * @return string
      */
     public function streetName()
@@ -330,12 +331,13 @@ class Address extends \Faker\Provider\Address
 
     /**
      * Generates a street address combining a random street number with a street name.
-     * 
+     *
      * @return string Full street address
      */
     public function streetAddress()
     {
         $number = $this->numberBetween(1, 200);
-        return $number . ' ' . $this->streetName();
+
+        return $number.' '.$this->streetName();
     }
 }

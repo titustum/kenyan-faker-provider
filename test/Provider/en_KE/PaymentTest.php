@@ -11,7 +11,7 @@ use Faker\Test\TestCase;
  */
 final class PaymentTest extends TestCase
 {
-    public function testMobileMoneyProviderIsValid(): void
+    public function test_mobile_money_provider_is_valid(): void
     {
         $provider = Payment::mobileMoneyProvider();
 
@@ -20,7 +20,7 @@ final class PaymentTest extends TestCase
         self::assertContains($provider, $providers);
     }
 
-    public function testPaybillNumberIsValid(): void
+    public function test_paybill_number_is_valid(): void
     {
         $paybill = Payment::paybillNumber();
 
@@ -29,7 +29,7 @@ final class PaymentTest extends TestCase
         self::assertContains($paybill, $paybills);
     }
 
-    public function testTransactionCodeFormat(): void
+    public function test_transaction_code_format(): void
     {
         $code = Payment::transactionCode();
 
@@ -37,7 +37,7 @@ final class PaymentTest extends TestCase
         self::assertEquals(10, strlen($code));
     }
 
-    public function testBankIsValid(): void
+    public function test_bank_is_valid(): void
     {
         $bank = Payment::bank();
 
@@ -46,7 +46,7 @@ final class PaymentTest extends TestCase
         self::assertContains($bank, $banks);
     }
 
-    public function testBankAccountNumberFormat(): void
+    public function test_bank_account_number_format(): void
     {
         $accountNumber = Payment::bankAccountNumber();
 
@@ -54,7 +54,7 @@ final class PaymentTest extends TestCase
         self::assertEquals(12, strlen($accountNumber));
     }
 
-    public function testMobileMoneyNumberFormat(): void
+    public function test_mobile_money_number_format(): void
     {
         $mobileNumber = Payment::mobileMoneyNumber();
 
@@ -62,7 +62,7 @@ final class PaymentTest extends TestCase
         self::assertEquals(10, strlen($mobileNumber));
     }
 
-    public function testMobileMoneyStatementStructure(): void
+    public function test_mobile_money_statement_structure(): void
     {
         $statement = Payment::mobileMoneyStatement();
 

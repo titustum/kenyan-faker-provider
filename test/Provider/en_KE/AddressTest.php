@@ -11,11 +11,11 @@ use Faker\Test\TestCase;
  */
 final class AddressTest extends TestCase
 {
-    public function testPostcodeIsNotEmptyAndIsValid(): void
+    public function test_postcode_is_not_empty_and_is_valid(): void
     {
         $postcode = Address::postcode();
 
-        self::assertTrue(!empty($postcode));
+        self::assertTrue(! empty($postcode));
         self::assertIsString($postcode);
         self::assertMatchesRegularExpression('/^\d{5}$/', $postcode);
 
@@ -31,52 +31,52 @@ final class AddressTest extends TestCase
         self::assertTrue($valid, "Postcode {$postcode} is not in a valid range");
     }
 
-    public function testCountyIsAValidString(): void
+    public function test_county_is_a_valid_string(): void
     {
         $county = $this->faker->county;
 
-        self::assertTrue(!empty($county));
+        self::assertTrue(! empty($county));
         self::assertIsString($county);
     }
 
-    public function testRegionIsAValidString(): void
+    public function test_region_is_a_valid_string(): void
     {
         $region = $this->faker->region;
 
-        self::assertTrue(!empty($region));
+        self::assertTrue(! empty($region));
         self::assertIsString($region);
     }
 
-    public function testCityIsAValidString(): void
+    public function test_city_is_a_valid_string(): void
     {
         $city = $this->faker->city;
 
-        self::assertTrue(!empty($city));
+        self::assertTrue(! empty($city));
         self::assertIsString($city);
     }
 
-    public function testTownIsAliasForCity(): void
+    public function test_town_is_alias_for_city(): void
     {
         $town = $this->faker->town;
         $city = $this->faker->city;
 
-        self::assertTrue(!empty($town));
+        self::assertTrue(! empty($town));
         self::assertIsString($town);
     }
 
-    public function testStreetNameIsAValidString(): void
+    public function test_street_name_is_a_valid_string(): void
     {
         $street = $this->faker->streetName;
 
-        self::assertTrue(!empty($street));
+        self::assertTrue(! empty($street));
         self::assertIsString($street);
     }
 
-    public function testStreetAddressIsFormattedCorrectly(): void
+    public function test_street_address_is_formatted_correctly(): void
     {
         $streetAddress = $this->faker->streetAddress;
 
-        self::assertTrue(!empty($streetAddress));
+        self::assertTrue(! empty($streetAddress));
         self::assertIsString($streetAddress);
         self::assertMatchesRegularExpression('/^\d+ .+$/', $streetAddress);
     }

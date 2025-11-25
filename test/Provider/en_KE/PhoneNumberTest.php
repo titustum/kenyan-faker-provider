@@ -11,7 +11,7 @@ use Faker\Test\TestCase;
  */
 final class PhoneNumberTest extends TestCase
 {
-    public function testPhoneNumberFormats(): void
+    public function test_phone_number_formats(): void
     {
         $phoneNumber = $this->faker->phoneNumber;
 
@@ -26,7 +26,7 @@ final class PhoneNumberTest extends TestCase
         self::assertMatchesRegularExpression($pattern, $phoneNumber);
     }
 
-    public function testE164PhoneNumberFormats(): void
+    public function test_e164_phone_number_formats(): void
     {
         // The provider does not expose a separate e164 method by default,
         // but we can test if the phoneNumber matches e164 formats too.

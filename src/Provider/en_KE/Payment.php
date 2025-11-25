@@ -72,7 +72,6 @@ class Payment extends \Faker\Provider\Payment
         );
     }
 
-
     /**
      * Generate a random Kenyan bank name.
      */

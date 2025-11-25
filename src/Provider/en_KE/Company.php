@@ -4,7 +4,7 @@ namespace KenyaFaker\Provider\en_KE;
 
 /**
  * Class Company
- * 
+ *
  * Provides Kenyan-specific company names for Faker.
  * Includes well-known companies and organizations in Kenya.
  * Extends the base Faker Company provider.
@@ -13,7 +13,7 @@ class Company extends \Faker\Provider\Company
 {
     /**
      * @var array List of Kenyan company names.
-     * See https://en.wikipedia.org/wiki/List_of_companies_of_Kenya
+     *            See https://en.wikipedia.org/wiki/List_of_companies_of_Kenya
      */
     protected static $companyName = [
         'Jumia Kenya',
@@ -89,7 +89,7 @@ class Company extends \Faker\Provider\Company
      *
      * This method randomly appends a suffix such as "Ltd.", "Limited", or "PLC" to
      * Kenyan company names to better reflect local naming conventions.
-     * 
+     *
      * @return string
      */
     public function company()
@@ -103,7 +103,7 @@ class Company extends \Faker\Provider\Company
 
             // Append suffix only if it's not already part of the company name (case-insensitive)
             if (stripos($company, $suffix) === false) {
-                $company .= ' ' . $suffix;
+                $company .= ' '.$suffix;
             }
         }
 

@@ -11,7 +11,7 @@ use Faker\Test\TestCase;
  */
 final class InternetTest extends TestCase
 {
-    public function testDomainNameHasValidTld(): void
+    public function test_domain_name_has_valid_tld(): void
     {
         $domain = $this->faker->domainName();
 
@@ -22,7 +22,7 @@ final class InternetTest extends TestCase
 
         $found = false;
         foreach ($tlds as $tld) {
-            if (str_ends_with($domain, '.' . $tld)) {
+            if (str_ends_with($domain, '.'.$tld)) {
                 $found = true;
                 break;
             }
@@ -31,7 +31,7 @@ final class InternetTest extends TestCase
         self::assertTrue($found, 'Domain name should end with a valid Kenyan TLD');
     }
 
-    public function testFreeEmailHasValidDomain(): void
+    public function test_free_email_has_valid_domain(): void
     {
         $email = $this->faker->freeEmail();
 
@@ -44,7 +44,7 @@ final class InternetTest extends TestCase
         self::assertContains($domain, $freeEmailDomains, 'Free email domain should be one of the Kenyan free email domains');
     }
 
-    public function testCompanyEmailHasValidIspDomain(): void
+    public function test_company_email_has_valid_isp_domain(): void
     {
         $email = $this->faker->companyEmail();
 
@@ -57,7 +57,7 @@ final class InternetTest extends TestCase
         self::assertContains($domain, $ispDomains, 'Company email domain should be one of the Kenyan ISP domains');
     }
 
-    public function testFreeEmailIsValid(): void
+    public function test_free_email_is_valid(): void
     {
         $email = $this->faker->freeEmail();
 
@@ -81,7 +81,6 @@ final class InternetTest extends TestCase
             'Free email domain should be one of the known free email domains'
         );
     }
-
 
     protected function getProviders(): iterable
     {

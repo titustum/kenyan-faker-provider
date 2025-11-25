@@ -9,18 +9,18 @@ use Faker\Test\TestCase;
 
 final class PersonTest extends TestCase
 {
-    public function testFirstNameMale(): void
+    public function test_first_name_male(): void
     {
-        for ($i = 0; $i < 100; ++$i) {
+        for ($i = 0; $i < 100; $i++) {
             $name = $this->faker->firstNameMale();
             self::assertIsString($name);
             self::assertNotEmpty($name);
         }
     }
 
-    public function testFirstNameFemale(): void
+    public function test_first_name_female(): void
     {
-        for ($i = 0; $i < 100; ++$i) {
+        for ($i = 0; $i < 100; $i++) {
             $name = $this->faker->firstNameFemale();
             self::assertIsString($name);
             self::assertNotEmpty($name);
