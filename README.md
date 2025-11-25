@@ -6,7 +6,8 @@ Kenyan-specific locale data for [Faker](https://github.com/FakerPHP/Faker), desi
 This package adds support for realistic Kenyan: 
 - Person names (including Christian & Islamic names)
 - Phone numbers (Safaricom, Airtel, etc.)
-- Addresses (coming soon)
+- Addresses
+- Counties, Towns & Cities
 - Companies, Payments, and more
 
 > 📦 Package: `titustum/kenyan-faker-provider`  
