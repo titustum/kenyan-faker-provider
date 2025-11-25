@@ -28,26 +28,109 @@ composer require titustum/kenyan-faker-provider --dev
 
 ## 🚀 Usage
 
-### A. In Laravel Seeder
+### A. In a Laravel Seeder (Recommended)
+
+You can load the Kenyan Faker providers manually or rely on locale auto-loading.
+
+#### **1. Manual Registration of Providers**
 
 ```php
 use Faker\Factory as Faker;
 
-$faker = Faker::create();
-$faker->addProvider(new \KenyaFaker\Provider\en_KE\Person($faker));
-$faker->addProvider(new \KenyaFaker\Provider\en_KE\PhoneNumber($faker));
+class UsersTableSeeder extends Seeder
+{
+    public function run()
+    {
+        $faker = Faker::create();
 
-echo $faker->name('male');
-echo $faker->phoneNumber();
+        // Register Kenyan providers
+        $faker->addProvider(new \KenyaFaker\Provider\en_KE\Person($faker));
+        $faker->addProvider(new \KenyaFaker\Provider\en_KE\PhoneNumber($faker));
+        $faker->addProvider(new \KenyaFaker\Provider\en_KE\Address($faker));
+        $faker->addProvider(new \KenyaFaker\Provider\en_KE\Company($faker));
+        $faker->addProvider(new \KenyaFaker\Provider\en_KE\Payment($faker));
+        $faker->addProvider(new \KenyaFaker\Provider\en_KE\Internet($faker));
+
+        DB::table('users')->insert([
+            'name'       => $faker->name('male'),  // James Kiprotich
+            'email'      => $faker->email(),
+            'phone'      => $faker->phoneNumber(),
+            'county'     => $faker->county(),
+            'address'    => $faker->address(),
+            'company'    => $faker->company(),
+            'mpesa_till' => $faker->mpesaTill(),
+        ]);
+    }
+}
 ```
 
-### B. With Locale (if mapped to `en_KE`)
+---
 
-If you're following Faker's locale conventions:
+### B. Using the Kenyan Locale (`en_KE`)
+
+If you follow standard Faker locale conventions, you can load all providers automatically:
 
 ```php
 $faker = Faker::create('en_KE');
-echo $faker->name('female');
+
+echo $faker->name();            // e.g., "Brian Kiptoo"
+echo $faker->phoneNumber();     // e.g., "0722 123 456"
+echo $faker->county();          // e.g., "Nairobi"
+echo $faker->company();         // e.g., "Kilimanjaro Logistics Ltd"
+echo $faker->mpesaPaybill();    // e.g., "123456"
+echo $faker->email();           // e.g., "mary.wanjiru@example.co.ke"
+```
+
+No manual provider registration required — Laravel auto-discovers the package.
+
+---
+
+### C. Quick Examples (All Providers)
+
+#### **Person**
+
+```php
+$faker->name();          // "Mary Wanjiku"
+$faker->firstName();     // "Amina"
+$faker->lastName();      // "Mutua"
+```
+
+#### **Phone Number**
+
+```php
+$faker->phoneNumber();   // "0722 654 321"
+$faker->mobileNumber();  // "0798 123 456"
+```
+
+#### **Address**
+
+```php
+$faker->county();        // "Kiambu"
+$faker->town();          // "Thika"
+$faker->postalCode();    // "01000"
+$faker->address();       // "Thika, Kiambu 01000"
+```
+
+#### **Company**
+
+```php
+$faker->company();       // "Rift Valley Traders Ltd"
+$faker->companySuffix(); // "Enterprises"
+```
+
+#### **Payment (MPESA)**
+
+```php
+$faker->mpesaPaybill();  // "345678"
+$faker->mpesaTill();     // "923456"
+```
+
+#### **Internet**
+
+```php
+$faker->email();         // "kevin.kiprotich@kenya.co.ke"
+$faker->domainName();    // "nairobitech.co.ke"
+$faker->userName();      // "wanjiku.m"
 ```
 
 > This will automatically use the `Faker\Provider\en_KE` providers if they're properly autoloaded.
@@ -60,9 +143,9 @@ echo $faker->name('female');
 | ----------------- | ------- | ----------------------------------------------- |
 | `Person.php`      | ✅ Ready | Kenyan male/female first & last names           |
 | `PhoneNumber.php` | ✅ Ready | Kenyan mobile phone numbers (Safaricom, Airtel) |
-| `Address.php`     | 🚧 WIP  | Kenyan counties, towns, postal codes            |
-| `Company.php`     | 🚧 WIP  | Local business suffixes and names               |
-| `Payment.php`     | 🚧 WIP  | Mock MPESA Paybill, Till numbers                |
+| `Address.php`     | ✅ Ready  | Kenyan counties, towns, postal codes            |
+| `Company.php`     | ✅ Ready  | Local business suffixes and names               |
+| `Payment.php`     | ✅ Ready  | Mock MPESA Paybill, Till numbers                |
 
 ---
 
@@ -125,9 +208,10 @@ Pull requests are welcome! Feel free to submit bug fixes, new providers, or impr
 
 * [x] Person names (Christian, Muslim, regional)
 * [x] Phone numbers (Safaricom, Airtel, Telkom)
-* [ ] Address data (Counties, Sub-counties, P.O. Boxes)
-* [ ] Company data
-* [ ] Payment providers (MPESA, Airtel Money, etc.)
+* [x] Address data (Counties, Sub-counties, P.O. Boxes)
+* [x] Company data
+* [x] Payment providers (MPESA, Airtel Money, etc.)
+* [ ] Add reginal/tribal based names
 
 ---
 
