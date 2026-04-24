@@ -27,5 +27,12 @@
   "prefer-stable": true,
   "require-dev": {
     "laravel/pint": "^1.25"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "KenyaFaker\\Laravel\\KenyanFakerServiceProvider"
+      ]
+    }
   }
 }

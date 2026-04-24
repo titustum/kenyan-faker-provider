@@ -1,169 +1,183 @@
+# Kenyan Faker Provider 🇰🇪
 
-# Kenyan Faker Provider
+Kenyan-specific locale data for [Faker](https://github.com/FakerPHP/Faker), designed for PHP applications and Laravel projects.
 
-Kenyan-specific locale data for [Faker](https://github.com/FakerPHP/Faker), designed for use with PHP applications and Laravel projects.
+Once installed, **`fake()` and `$this->faker` automatically generate Kenyan data** — no manual setup required.
 
-This package adds support for realistic Kenyan: 
-- Person names (including Christian & Islamic names)
-- Phone numbers (Safaricom, Airtel, etc.)
-- Addresses
-- Counties, Towns & Cities
-- Companies, Payments, and more
-
-> 📦 Package: `titustum/kenyan-faker-provider`  
+> 📦 Package: `titustum/kenyan-faker-provider`
 > 🇰🇪 Locale: `en_KE`
+
+Supported data:
+
+- Person names (Christian & Islamic names)
+- Phone numbers (Safaricom, Airtel, Telkom)
+- Counties, Towns & Cities
+- Addresses & Postal Codes
+- Companies
+- MPESA Payments (Paybill & Till)
+- Kenyan Internet data (emails, domains, usernames)
 
 ---
 
 ## 📦 Installation
 
-### A. Using Composer
-
 ```bash
 composer require titustum/kenyan-faker-provider --dev
-````
+```
 
-> Make sure `fakerphp/faker` is also installed (Laravel includes it by default).
+That's it. Laravel auto-discovers the package and registers the `KenyanFakerServiceProvider` automatically. No changes to `config/app.php` needed.
+
+> **Note:** If you have a cached config, run `php artisan config:clear` and `php artisan package:discover` after installing.
 
 ---
 
 ## 🚀 Usage
 
-### A. In a Laravel Seeder (Recommended)
+### In Laravel — Zero Configuration
 
-You can load the Kenyan Faker providers manually or rely on locale auto-loading.
-
-#### **1. Manual Registration of Providers**
+After installation, `fake()` and `$this->faker` are already Kenyan. Use them anywhere:
 
 ```php
-use Faker\Factory as Faker;
+// In a Factory
+public function definition(): array
+{
+    return [
+        'name'    => fake()->name(),           // "Mary Wanjiku"
+        'email'   => fake()->email(),          // "mary.wanjiku@kenya.co.ke"
+        'phone'   => fake()->phoneNumber(),    // "0722 654 321"
+        'county'  => fake()->county(),         // "Kiambu"
+        'town'    => fake()->town(),           // "Thika"
+        'address' => fake()->address(),        // "Thika, Kiambu 01000"
+        'company' => fake()->company(),        // "Rift Valley Traders Ltd"
+    ];
+}
+```
 
+```php
+// In a Seeder
 class UsersTableSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        $faker = Faker::create();
-
-        // Register Kenyan providers
-        $faker->addProvider(new \KenyaFaker\Provider\en_KE\Person($faker));
-        $faker->addProvider(new \KenyaFaker\Provider\en_KE\PhoneNumber($faker));
-        $faker->addProvider(new \KenyaFaker\Provider\en_KE\Address($faker));
-        $faker->addProvider(new \KenyaFaker\Provider\en_KE\Company($faker));
-        $faker->addProvider(new \KenyaFaker\Provider\en_KE\Payment($faker));
-        $faker->addProvider(new \KenyaFaker\Provider\en_KE\Internet($faker));
-
         DB::table('users')->insert([
-          'name'       => $faker->name('male'),      // e.g. "James Kiprotich"
-          'email'      => $faker->email(),           // e.g. "j.kiprotich@example.co.ke"
-          'phone'      => $faker->phoneNumber(),     // e.g. "0722 456 789"
-          'county'     => $faker->county(),          // e.g. "Uasin Gishu"
-          'town'     => $faker->town(),          // e.g. "Kakamega"
-          'city'     => $faker->city(),          // e.g. "Garissa"
-          'address'    => $faker->address(),         // e.g. "Eldoret, Uasin Gishu 30100"
-          'company'    => $faker->company(),         // e.g. "Kilimanjaro Supplies Ltd"
-          'mpesa_till' => $faker->mpesaTill(),       // e.g. "923456"
-      ]);
-
+            'name'       => $this->faker->name(),
+            'email'      => $this->faker->email(),
+            'phone'      => $this->faker->phoneNumber(),
+            'county'     => $this->faker->county(),
+            'mpesa_till' => $this->faker->mpesaTill(),   // "923456"
+        ]);
     }
 }
 ```
 
----
-
-### B. Using the Kenyan Locale (`en_KE`)
-
-If you follow standard Faker locale conventions, you can load all providers automatically:
+### Outside Laravel (Plain PHP)
 
 ```php
-$faker = Faker::create('en_KE');
+use Faker\Factory;
+use KenyaFaker\Provider\en_KE\Person;
+use KenyaFaker\Provider\en_KE\PhoneNumber;
+use KenyaFaker\Provider\en_KE\Address;
+use KenyaFaker\Provider\en_KE\Company;
+use KenyaFaker\Provider\en_KE\Payment;
+use KenyaFaker\Provider\en_KE\Internet;
 
-echo $faker->name();            // e.g., "Brian Kiptoo"
-echo $faker->phoneNumber();     // e.g., "0722 123 456"
-echo $faker->county();          // e.g., "Nairobi"
-echo $faker->town();          // e.g., "Nakuru"
-echo $faker->city();          // e.g., "Nyeri"
-echo $faker->company();         // e.g., "Kilimanjaro Logistics Ltd"
-echo $faker->mpesaPaybill();    // e.g., "123456"
-echo $faker->email();           // e.g., "mary.wanjiru@example.co.ke"
+$faker = Factory::create('en_KE');
+
+$faker->addProvider(new Person($faker));
+$faker->addProvider(new PhoneNumber($faker));
+$faker->addProvider(new Address($faker));
+$faker->addProvider(new Company($faker));
+$faker->addProvider(new Payment($faker));
+$faker->addProvider(new Internet($faker));
+
+echo $faker->name();         // "Brian Kiptoo"
+echo $faker->county();       // "Uasin Gishu"
+echo $faker->phoneNumber();  // "0733 123 456"
 ```
-
-No manual provider registration required — Laravel auto-discovers the package.
-
----
-
-### C. Quick Examples (All Providers)
-
-#### **Person**
-
-```php
-$faker->name();          // "Mary Wanjiku"
-$faker->firstName();     // "Amina"
-$faker->lastName();      // "Mutua"
-```
-
-#### **Phone Number**
-
-```php
-$faker->phoneNumber();   // "0722 654 321"
-$faker->mobileNumber();  // "0798 123 456"
-```
-
-#### **Address**
-
-```php
-$faker->county();        // "Kiambu"
-$faker->town();          // "Thika"
-$faker->postalCode();    // "01000"
-$faker->address();       // "Thika, Kiambu 01000"
-```
-
-#### **Company**
-
-```php
-$faker->company();       // "Rift Valley Traders Ltd"
-$faker->companySuffix(); // "Enterprises"
-```
-
-#### **Payment (MPESA)**
-
-```php
-$faker->mpesaPaybill();  // "345678"
-$faker->mpesaTill();     // "923456"
-```
-
-#### **Internet**
-
-```php
-$faker->email();         // "kevin.kiprotich@kenya.co.ke"
-$faker->domainName();    // "nairobitech.co.ke"
-$faker->userName();      // "wanjiku.m"
-```
-
-> This will automatically use the `Faker\Provider\en_KE` providers if they're properly autoloaded.
 
 ---
 
-## 🧩 Features
+## 🧩 Available Providers
 
-| Provider          | Status  | Description                                     |
-| ----------------- | ------- | ----------------------------------------------- |
-| `Person.php`      | ✅ Ready | Kenyan male/female first & last names           |
-| `PhoneNumber.php` | ✅ Ready | Kenyan mobile phone numbers (Safaricom, Airtel) |
-| `Address.php`     | ✅ Ready  | Kenyan counties, towns, postal codes            |
-| `Company.php`     | ✅ Ready  | Local business suffixes and names               |
-| `Payment.php`     | ✅ Ready  | Mock MPESA Paybill, Till numbers                |
+### Person
+
+```php
+fake()->name();            // "Mary Wanjiku"
+fake()->name('male');      // "James Kiprotich"
+fake()->name('female');    // "Amina Akinyi"
+fake()->firstName();       // "Amina"
+fake()->lastName();        // "Mutua"
+```
+
+### Phone Number
+
+```php
+fake()->phoneNumber();     // "0722 654 321"
+fake()->mobileNumber();    // "0798 123 456"
+```
+
+### Address
+
+```php
+fake()->county();          // "Kiambu"
+fake()->town();            // "Thika"
+fake()->city();            // "Garissa"
+fake()->postalCode();      // "01000"
+fake()->address();         // "Thika, Kiambu 01000"
+```
+
+### Company
+
+```php
+fake()->company();         // "Rift Valley Traders Ltd"
+fake()->companySuffix();   // "Enterprises"
+```
+
+### Payment (MPESA)
+
+```php
+fake()->mpesaPaybill();    // "345678"
+fake()->mpesaTill();       // "923456"
+```
+
+### Internet
+
+```php
+fake()->email();           // "kevin.kiprotich@kenya.co.ke"
+fake()->domainName();      // "nairobitech.co.ke"
+fake()->userName();        // "wanjiku.m"
+```
 
 ---
 
-## ⚙️ Laravel Auto-Discovery
+## ⚙️ How Auto-Discovery Works
 
-This package supports Laravel auto-discovery via `KenyaFaker\Laravel\KenyanFakerServiceProvider`.
+When you install the package, Laravel auto-discovers `KenyanFakerServiceProvider` via the `extra.laravel` key in `composer.json`. The service provider:
+
+1. Sets the app's faker locale to `en_KE`
+2. Rebinds the `Faker\Generator` singleton with all Kenyan providers pre-loaded
+3. Ensures both `fake()` and `$this->faker` point to the same Kenyan instance
+
+This means **you never need to call `Faker::create('en_KE')` or `addProvider()` manually** in a Laravel project.
+
+---
+
+## 🛠 Features
+
+| Provider          | Status    | Description                                      |
+|-------------------|-----------|--------------------------------------------------|
+| `Person.php`      | ✅ Ready  | Kenyan male/female first & last names            |
+| `PhoneNumber.php` | ✅ Ready  | Kenyan mobile numbers (Safaricom, Airtel, Telkom)|
+| `Address.php`     | ✅ Ready  | Counties, towns, postal codes                    |
+| `Company.php`     | ✅ Ready  | Local business names and suffixes                |
+| `Payment.php`     | ✅ Ready  | MPESA Paybill & Till numbers                     |
+| `Internet.php`    | ✅ Ready  | Kenyan emails, domains, usernames                |
 
 ---
 
 ## 🛠 Local Development Setup
 
-To test locally in another Laravel app:
+To test locally inside another Laravel app:
 
 1. Clone this repo:
 
@@ -171,22 +185,50 @@ To test locally in another Laravel app:
    git clone https://github.com/titustum/kenyan-faker-provider.git
    ```
 
-2. In your Laravel app `composer.json`:
+2. In your Laravel app's `composer.json`, add a path repository:
 
-```json
-"repositories": [
-  {
-    "type": "path",
-    "url": "../path-to/kenyan-faker-provider"
-  }
-]
-```
+   ```json
+   "repositories": [
+     {
+       "type": "path",
+       "url": "../path-to/kenyan-faker-provider"
+     }
+   ]
+   ```
 
 3. Require the package:
 
-```bash
-composer require titustum/kenyan-faker-provider --dev
-```
+   ```bash
+   composer require titustum/kenyan-faker-provider --dev
+   ```
+
+4. Clear caches:
+
+   ```bash
+   php artisan package:discover
+   php artisan config:clear
+   ```
+
+---
+
+## 🌍 Roadmap
+
+- [x] Person names (Christian, Muslim, regional)
+- [x] Phone numbers (Safaricom, Airtel, Telkom)
+- [x] Address data (Counties, Towns, P.O. Boxes)
+- [x] Company data
+- [x] Payment providers (MPESA Paybill & Till)
+- [x] Internet data (emails, domains)
+- [x] Laravel auto-discovery (zero-config setup)
+- [ ] Regional/tribal name sets
+- [ ] Sub-county and ward level address data
+- [ ] Airtel Money & T-Kash payment numbers
+
+---
+
+## 🙌 Contributing
+
+Pull requests are welcome! Feel free to submit bug fixes, new providers, or improved datasets. Please open an issue first for major changes.
 
 ---
 
@@ -204,24 +246,6 @@ This package is open-sourced software licensed under the [MIT license](LICENSE).
 
 ---
 
-## 🙌 Contributing
-
-Pull requests are welcome! Feel free to submit bug fixes, new providers, or improved datasets.
-
----
-
-## 🌍 Roadmap
-
-* [x] Person names (Christian, Muslim, regional)
-* [x] Phone numbers (Safaricom, Airtel, Telkom)
-* [x] Address data (Counties, Sub-counties, P.O. Boxes)
-* [x] Company data
-* [x] Payment providers (MPESA, Airtel Money, etc.)
-* [ ] Add reginal/tribal based names
-
----
-
 ## ⭐️ Why Use This?
 
-Laravel projects targeting Kenya often lack realistic seed data. This package brings localized names, phone numbers, and business data so your app looks and behaves closer to real-world usage in Kenya.
- 
+Laravel projects targeting Kenya often lack realistic seed data. This package brings localized names, phone numbers, addresses, and business data — and unlike generic Faker, it works out of the box with zero configuration. Install it once, and every `fake()` call in your app speaks Kenyan.
