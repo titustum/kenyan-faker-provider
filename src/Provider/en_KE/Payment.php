@@ -54,11 +54,20 @@ class Payment extends \Faker\Provider\Payment
     }
 
     /**
-     * Generate a random Kenyan Paybill number.
+     * Generate a random Kenyan Mpesa Paybill number.
      */
     public static function paybillNumber(): string
     {
         return static::randomElement(static::$paybillNumbers);
+    }
+
+     /**
+     * Generate a random Kenyan Mpesa Till number.
+     */
+    public static function tillNumber(): string
+    {
+        // Generates a random number between 100000 and 999999
+        return (string)mt_rand(100000, 999999);
     }
 
     /**
